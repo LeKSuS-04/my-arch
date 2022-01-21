@@ -9,6 +9,7 @@ echo
 echo "Installing pacman software..."
 
 PACKAGES=(
+    'git'               # Version control system
     'kitty'             # Terminal emulator
     'ranger'            # File manager
 )
