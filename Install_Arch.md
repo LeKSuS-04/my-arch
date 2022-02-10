@@ -202,4 +202,15 @@ Reboot the machine
 
 ## 2. Setting up comfortable workspace
 ### 2.1 Installing software
-...
+List avaliable wifi networks:
+```
+nmcli device wifi list
+```
+Connect to your network:
+```
+sudo nmcli device wifi connect <SSID> password <passwod>
+```
+Check connection:
+```
+ping -c 3 archlinux.org
+```
