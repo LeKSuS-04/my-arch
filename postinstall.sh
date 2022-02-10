@@ -10,6 +10,8 @@ echo
 echo "Updating system"
 sudo pacman -Syyu --noconfirm
 
+#! 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
+
 PACMAN_PKGS=(
     # ===== Screen =====
     'brightnessctl'         # Brightness controller
@@ -56,20 +58,20 @@ makepkg -si
 
 AUR_PKGS=(
     # ===== Screen =====
-    'picom-jonaburg-git'    # Picom fork with extra functionality
+    'picom-jonaburg-git'        # Picom fork with extra functionality
 
     # ===== Audio =====
-    'pacmixer'              # CLI audio mixer
+    'pacmixer'                  # CLI audio mixer
 
     # ===== Graphics =====
-    'aseprite'              # Pixel-art editor
+    'aseprite'                  # Pixel-art editor
 
     # ===== Misc CLI tools =====
     'ufetch-git'                # Fetching system information
-    'unimatrix'             # Scipt to simulate terminal from "The Matrix"
+    'unimatrix'                 # Scipt to simulate terminal from "The Matrix"
 
     # ===== General purpose =====
-    'brave'                 # Web browser
+    'brave'                     # Web browser
     'mons'                      # Utility for dual-monitor control
     'nerd-fonts-complete'       # Font pack
     'spotify'                   # Music player
