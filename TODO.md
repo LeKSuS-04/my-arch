@@ -9,16 +9,16 @@
 - [X] DNS security
 - [ ] Eww widgets installation
 - [ ] Eww widgets configuration
-- [ ] Rofi window switcher
-- [ ] Pacman software list
-- [ ] AUR software list
-- [ ] Wine/windows virtualization
-- [ ] Kali virtualization (or some other kind of a tool to run security distro in isolated environment)
-- [ ] \(?) Desktop/login manager (thing that will show up on system boot)
-- [ ] \(?) Hardware drivers (Videocard, etc.)
-- [ ] \(?) Bluetooth
-- [ ] \(?) Ethernet
-- [ ] \(?) Printer
-- [ ] \(?) Notifications
-- [ ] \(?) Firewall security
-- [ ] \(?) Russian localization (keyboard + fonts)
+- [X] Rofi window switcher
+- [X] Pacman software list
+- [X] AUR software list
+- [X] Wine/windows virtualization
+- [X] Kali virtualization (or some other kind of a tool to run security distro in isolated environment)
+- [X] Desktop/login manager (thing that will show up on system boot)
+- [?] Hardware drivers (Videocard, etc.)
+- [X] Bluetooth
+- [X] Ethernet
+- [?] Printer
+- [X] Notifications
+- [X] Firewall security
+- [X] Russian localization (keyboard + fonts)

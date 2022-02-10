@@ -110,6 +110,7 @@ hwclock --systohc
 ```
 Configure localization:
 * Uncomment needed locales in `/etc/locale.gen`
+* Generate locales using `locale-gen` command
 * Create `/etc/locale.conf` and set `LANG` variables there:
 ```
 LANG=en_US.UTF-8
@@ -121,7 +122,7 @@ loadkeys ru
 ```
 Choose and set console font:
 ```
-ls /usr/share/jbd/consolefonts
+ls /usr/share/kbd/consolefonts
 setfont <font>
 ```
 Add chosen font and keyboard layout to `/etc/vconsole.conf`:
@@ -153,11 +154,12 @@ pacman -Syu \
     base-devel \            # Some basic binaries such as file, gcc, gzip and other
     linux-zen-headers \     # Header files
     net-tools \             # Tools for managing network connections
+    nvidia-dkms \           # Support for Nvidia graphics card driver
     wireless_tools \        # Tools for managing wireless connections
     wpa_supplicant \        # Utility providing key negotiation for WPA wireless networks
     bluez \                 # Bluetooth manager
     bluez-utils \           # Utilities for bluetooth
-    intel-ucode             # CPU microcode
+    [intel|amd]-ucode             # CPU microcode
 ```
 Install grub on disk:
 ```
