@@ -12,30 +12,37 @@ sudo pacman -Syyu --noconfirm
 
 PACMAN_PKGS=(
     # ===== Screen =====
-    'brightnessctl'     # Brightness controller
-    'bspwm'             # Window manager
-    'lightdm'           # Light display manager
+    'brightnessctl'         # Brightness controller
+    'bspwm'                 # Window manager
+    'lightdm'               # Light display manager
     'lightdm-gtk-greeter'   # Display manager greeter
-    'nitrogen'          # Wallpaper manager
-    'xorg'              # Display server
+    'nitrogen'              # Wallpaper manager
+    'qtile'                 # Window manager
+    'scrot'                 # Taking screenshots
+    'xorg'                  # Display server
+    'xclip'                 # Clipboard utility
 
     # ===== Audio =====
-    'pulseaudio'        # Sound server
-    'pulseaudio-alsa'   # Pulseaudio to manage ALSA
+    'alsa-utils'            # Utilities for better sound control
+    'pulseaudio'            # Sound server
+    'pulseaudio-alsa'       # Pulseaudio to manage ALSA
 
-    # ===== Misc =====
-    'alacritty'         # Terminal emulator
-    'ranger'            # File manager
-    'rofi'              # Window switcher & application launcher
-    'sxhkd'             # Hotkey daemon
-    'wget'              # Tool for fetching data
+    # ===== Development =====
+    'python-pip'            # Package installer for python
+
+    # ===== General purpose =====
+    'alacritty'             # Terminal emulator
+    'ranger'                # File manager
+    'rofi'                  # Window switcher & application launcher
+    'sxhkd'                 # Hotkey daemon
+    'wget'                  # Tool for fetching data
 )
 for PKG in "${PACMAN_PKGS[@]}"; do
     echo
     echo "Installing ${PKG} [pacman]"
     sudo pacman -S "${PKG}" --noconfirm --needed
 done
-echo 
+echo
 echo "Pacman packages are installed :)"
 
 
@@ -48,19 +55,24 @@ cd yay
 makepkg -si
 
 AUR_PKGS=(
+    # ===== Screen =====
+    'picom-jonaburg-git'    # Picom fork with extra functionality
+
     # ===== Audio =====
-    'pacmixer'          # CLI audio mixer
+    'pacmixer'              # CLI audio mixer
 
     # ===== Graphics =====
-    'aseprite'          # Pixel-art editor
+    'aseprite'              # Pixel-art editor
 
     # ===== Misc CLI tools =====
-    'ufetch-git'        # Fetching system information
-    'unimatrix'         # Scipt to simulate terminal from "The Matrix"
+    'ufetch-git'                # Fetching system information
+    'unimatrix'             # Scipt to simulate terminal from "The Matrix"
 
-    # ===== Misc =====
-    'mons'              # Utility for dual-monitor control
-    'spotify'           # Music player
+    # ===== General purpose =====
+    'brave'                 # Web browser
+    'mons'                      # Utility for dual-monitor control
+    'nerd-fonts-complete'       # Font pack
+    'spotify'                   # Music player
     'visual-studio-code-bin'    # Superiour text editor
 )
 for PKG in "${AUR_PKGS[@]}"; do
@@ -70,19 +82,3 @@ for PKG in "${AUR_PKGS[@]}"; do
 done
 echo
 echo "AUR packages are installed :)"
-
-
-echo
-echo "Configuring packages"
-
-echo
-echo "Configuring lightdm"
-systemctl enable lightdm
-echo "Done!"
-
-echo
-echo "Configuring ..."
-echo "Done!"
-
-echo
-echo "Finished configuring packages"
