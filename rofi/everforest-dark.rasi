@@ -1,0 +1,134 @@
+* {
+    black:        #4a555b;
+    lightblack:   #525c62;
+
+    red:          #e67e80;
+    lightred:     #e67e80;
+    
+    green:        #a7c080;
+    lightgreen:   #a7c080;
+    
+    yellow:       #dbbc7f;
+    lightyellow:  #dbbc7f;
+    
+    blue:         #7fbbb3;
+    lightblue:    #7fbbb3;
+    
+    magenta:      #d699b6;
+    lightmagenta: #d699b6;
+    
+    cyan:         #83c092;
+    lightcyan:    #83c092;
+    
+    white:        #d3c6aa;
+    lightwhite:   #d3c6aa;
+
+    foreground:   @green;
+    background:   #2f383e;
+}
+
+window {
+    location: west;
+    anchor: west;
+    x-offset: 24px;
+    y-offset: 27px;
+    height: calc(100% - 24px - 78px);
+
+    width: 30%;
+    border: 2px solid;
+    children: [ mainbox ];
+
+    font: "FiraCode Nerd Font Mono 13";
+    text-color: @foreground;
+    background-color: @background;
+    border: 2px;
+    border-color: @foreground;
+}
+mainbox {
+    text-color: inherit;
+    background-color: inherit;
+    spacing: 0;
+    children: [ inputbar, message, listview, mode-switcher ];
+}
+
+inputbar {
+    text-color: inherit;
+    background-color: inherit;
+    children: [ entry ];
+}
+entry {
+    padding: 0.4em 0.4em;
+    text-color: inherit;
+    background-color: inherit;
+    placeholder: "Type something...";
+    placeholder-color: @lightblack;
+    cursor: text;
+}
+
+listview {
+    dynamic: false;
+    padding: 0.4em 0;
+    spacing: 0;
+
+    border: 2px 0 2px 0;
+    border-color: @foreground;
+
+    text-color: inherit;
+    background-color: inherit;
+
+    scrollbar: false;
+    children: [ element ];
+}
+scrollbar {
+    background-color: inherit;
+    handle-color: @black;
+    handle-width: 10px;
+    cursor: pointer;
+}
+element {
+    padding: 0 0.4em;
+    margin: 0.1em 0;
+    text-color: inherit;
+    background-color: inherit;
+    children: [ /* element-icon, */ element-text ]; 
+}
+element selected {
+    text-color: inherit;
+    background-color: @black;
+}
+element-icon {
+    background-color: transparent;
+    margin: 0 0.4em 0 0;
+}
+element-text {
+    text-color: inherit;
+    background-color: inherit;
+    highlight: bold;
+    cursor: pointer;
+}
+
+mode-switcher {
+    background-color: inherit;
+    text-color: inherit;
+    spacing: 0;
+}
+button {
+    background-color: inherit;
+    text-color: inherit;
+    margin: -2px;
+    padding: 0.4em 0;
+    border: 2px;
+    border-color: @foreground;
+    cursor: pointer;
+}
+button selected {
+    background-color: @foreground;
+    text-color: @background;
+}
+
+// Error message textbox
+textbox {
+    padding: 0.4em;
+    background-color: @background;
+    text-color: @red;
+}

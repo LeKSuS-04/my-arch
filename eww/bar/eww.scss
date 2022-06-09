@@ -1,0 +1,64 @@
+// Global
+* {
+  all: unset;
+}
+
+// Colors
+$background: #2f383e;
+$foreground: #a7c080;
+
+$background-lighter: adjust-color(
+  $color: $background,
+  $lightness: 8,
+);
+$background-active: adjust-color(
+  $color: $background,
+  $lightness: 12,
+);
+
+$border-style: 2px solid $foreground;
+
+// Main bar style
+.bar {
+  font-family: "FiraCode Nerd Font Mono";
+  font-weight: bold;
+  background-color: $background;
+  color: $foreground;
+  border: $border-style;
+}
+
+// Widgets
+@mixin base-widget {
+  color: $foreground;
+
+  &:hover {
+    background-color: $background-lighter;
+    border-right: $border-style;
+    border-left: $border-style;
+  }
+}
+@mixin text-widget-mixin {
+  @include base-widget;
+  font-size: 16px;
+}
+@mixin icon-widget-mixin {
+  @include base-widget;
+  font-size: 26px;
+}
+
+.time-widget {
+  @include text-widget-mixin;
+  font-size: 14px;
+}
+.icon-widget {
+  @include icon-widget-mixin;
+}
+.text-widget {
+  @include text-widget-mixin;
+}
+.power-button {
+  @include icon-widget-mixin;
+  &:hover {
+    border-right: none;
+  }
+}

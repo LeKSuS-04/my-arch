@@ -1,0 +1,118 @@
+(include "./bar/widgets/power.yuck")
+
+;; =================
+;; ;; Bar widgets ;;
+;; =================
+
+;; Time
+(defpoll current-time
+    :interval "1s"
+    :initial "CURRENT DATE"
+    "date +\"%d %b %H:%M\"")
+(defwidget time-widget []
+    (eventbox :class "time-widget"
+        :cursor "pointer"
+        :width "150"
+        current-time))
+
+;; Icons for the left side of the bar
+(defwidget icon-widget [?class ?width onclick data]
+    (eventbox :class { class ?: "icon-widget" }
+        :cursor "pointer"
+        :onclick onclick
+        :width { width ?: 40 }
+        { data ?: "?" }))
+
+;; Keyboard layout
+(deflisten current-kb-layout 
+    :initial "us(qwerty)"
+    "xkb-switch -W")
+(defwidget keyboard-layout []
+    (icon-widget :class "text-widget"
+        :onclick "~/.config/eww/bar/scripts/next_kb_layout.sh"
+        :data { captures(current-kb-layout, ".{2}")[0][0] })) ;; First two letters of layout
+
+;; JSON with system data
+(deflisten sys-data
+    :initial "{}"
+    ;; Actually, it's not run every 0.1 seconds
+    ;; For some reason sleep it's VEEEERY delayed
+    ;; when run by eww (???)
+    "~/.config/eww/bar/scripts/fetch_sys_data.py -t 0.1")
+
+;; Other icons
+(defwidget network-widget []
+    (icon-widget :onclick "echo 'TODO'"
+        :data { sys-data["network"]["icon"] }))
+
+(defwidget battery-widget []
+    (icon-widget
+        :onclick "echo 'TODO'"
+        :data { sys-data["battery"]["icon"] }))
+
+(defwidget brightness-widget []
+    (icon-widget
+        :onclick "echo 'TODO'"
+        :data { sys-data["brightness"]["icon"] }))
+
+(defwidget volume-widget []
+    (icon-widget
+        :onclick "echo 'TODO'"
+        :data { sys-data["volume"]["icon"] }))
+    
+(defwidget power-button []
+    (icon-widget :class "power-button"
+        :onclick "echo 'TODO'"
+        :data "")) ; nf-fa-power_off
+
+;; =====================================
+;; ;; Putting widgets together in bar ;;
+;; =====================================
+
+;; Three parts of bar: left, middle and right
+(defwidget bar-left []
+    (box :halign "start"
+        :space-evenly false
+        ))
+
+(defwidget bar-middle []
+    (box :halign "center"
+        :space-evenly false
+
+        :halign "center"
+        (time-widget)))
+
+(defwidget bar-right []
+    (box :halign "end"
+        :space-evenly false
+
+        (keyboard-layout)
+        (brightness-widget)
+        (volume-widget)
+        (network-widget)    
+        (battery-widget)
+        (power-button)))
+
+;; Full bar widget
+(defwidget bar-widget []
+    (centerbox :class "bar"
+        :orientation "horizontal"
+        (bar-left)
+        (bar-middle)
+        (bar-right)))
+
+;; Window that holds bar widget
+(defwindow bar
+    :monitor 0
+    :geometry (geometry :x "0" 
+                        :y "12px"
+                        :width "1872px"
+                        :height "42px"
+                        :anchor "top center")
+    :stacking "fg"
+    :reserve (struts :distance "66px"
+                        :side "top")
+    :windowtype "dock"
+    :wm-ignore false
+    
+    (bar-widget))
