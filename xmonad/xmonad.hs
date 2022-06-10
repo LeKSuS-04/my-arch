@@ -46,12 +46,20 @@ fullscreen = Full                   -- One window takes all space, others are hi
 myLayout :: ModifiedLayout AvoidStruts (Choose Tall (Choose (Mirror Tall) Full)) a
 myLayout = avoidStruts $ tiled ||| mirroredTiled ||| fullscreen
 
---
+--------------------------------- Keybindings ---------------------------------
 myKeys :: [(String, X ())]
 myKeys = 
     [ ("M-r", spawn "rofi -show drun")
     , ("M-w", kill)
-    , ("M-<Return>", spawn "kitty")
+    , ("M-<Return>", spawn myTerminal)
+
+    -- Function keys
+    , ("<XF86AudioMute>",           spawn "amixer sset Master toggle")
+    , ("<XF86AudioLowerVolume>",    spawn "amixer sset Master 10%-")
+    , ("<XF86AudioRaiseVolume>",    spawn "amixer sset Master 10%+")
+    , ("<XF86MonBrightnessUp>",     spawn "brightnessctl set 10%+")
+    , ("<XF86MonBrightnessDown>",   spawn "brightnessctl set 10%-")
+    , ("<XF86Calculator>",          spawn $ myTerminal ++ " python")
     ]
 
 ------------------------------- Startup hooks ---------------------------------
