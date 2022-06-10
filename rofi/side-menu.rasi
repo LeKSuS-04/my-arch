@@ -1,31 +1,4 @@
-* {
-    black:        #4a555b;
-    lightblack:   #525c62;
-
-    red:          #e67e80;
-    lightred:     #e67e80;
-    
-    green:        #a7c080;
-    lightgreen:   #a7c080;
-    
-    yellow:       #dbbc7f;
-    lightyellow:  #dbbc7f;
-    
-    blue:         #7fbbb3;
-    lightblue:    #7fbbb3;
-    
-    magenta:      #d699b6;
-    lightmagenta: #d699b6;
-    
-    cyan:         #83c092;
-    lightcyan:    #83c092;
-    
-    white:        #d3c6aa;
-    lightwhite:   #d3c6aa;
-
-    foreground:   @green;
-    background:   #2f383e;
-}
+@import "colors/colors.rasi"
 
 window {
     location: west;

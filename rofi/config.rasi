@@ -146,4 +146,4 @@ configuration {
   }
 }
 
-@theme "everforest-dark.rasi"
+@theme "side-menu.rasi"
