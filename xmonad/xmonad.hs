@@ -52,6 +52,7 @@ myKeys =
     [ ("M-r", spawn "rofi -show drun")
     , ("M-w", kill)
     , ("M-<Return>", spawn myTerminal)
+    , ("M-S-s", spawn "/home/leksus/.local/bin/screenshot.sh")
 
     -- Function keys
     , ("<XF86AudioMute>",           spawn "amixer sset Master toggle")
