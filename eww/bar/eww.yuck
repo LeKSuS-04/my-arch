@@ -49,7 +49,7 @@
 (defwidget time-widget []
     (eventbox :class "time-widget"
         :cursor "pointer"
-        :width "150"
+        :width 150
         current-time))
 
 
