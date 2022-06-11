@@ -6,6 +6,7 @@
 // Colors
 $background: #2f383e;
 $foreground: #a7c080;
+$active:     #7fbbb3;
 
 $background-lighter: adjust-color(
   $color: $background,
@@ -46,10 +47,19 @@ $border-style: 2px solid $foreground;
   font-size: 26px;
 }
 
+.workspace {
+  @include icon-widget-mixin;
+}
+.workspace-focused {
+  @include icon-widget-mixin;
+  color: $active;
+}
+
 .time-widget {
   @include text-widget-mixin;
   font-size: 14px;
 }
+
 .icon-widget {
   @include icon-widget-mixin;
 }

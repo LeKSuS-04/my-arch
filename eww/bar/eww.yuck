@@ -4,6 +4,23 @@
 ;; ;; Bar widgets ;;
 ;; =================
 
+;; Widgets for left side of bar
+;; Workspace widget
+(deflisten workspaces-json
+    :initial "[]"
+    "~/.config/eww/bar/scripts/workspaces.sh")
+(defwidget workspaces []
+    (box 
+        (for workspace in workspaces-json
+            (label :class { workspace["is_focused"] ? "workspace-focused" : "workspace" }
+                :width 28
+                :yalign 0.4
+                :text { workspace["is_focused"] ? "柳" :            ; nf-mdi-square_inc
+                            workspace["is_active"] ? "" :         ; nf-fa-square
+                                                        "" }))))  ; nf-mdi-crop_square
+
+
+;; Only widget on central part of bar:
 ;; Time
 (defpoll current-time
     :interval "1s"
@@ -14,6 +31,7 @@
         :cursor "pointer"
         :width "150"
         current-time))
+
 
 ;; Icons for the right side of the bar
 (defwidget icon-widget [?class ?width onclick data]
@@ -73,7 +91,8 @@
 (defwidget bar-left []
     (box :halign "start"
         :space-evenly false
-        ))
+
+        (workspaces)))
 
 (defwidget bar-middle []
     (box :halign "center"
