@@ -15,7 +15,7 @@
         :width "150"
         current-time))
 
-;; Icons for the left side of the bar
+;; Icons for the right side of the bar
 (defwidget icon-widget [?class ?width onclick data]
     (eventbox :class { class ?: "icon-widget" }
         :cursor "pointer"
