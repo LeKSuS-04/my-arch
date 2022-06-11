@@ -4,13 +4,33 @@
 ;; ;; Bar widgets ;;
 ;; =================
 
+;; Template for icon widget
+(defwidget icon-widget [?class ?width onclick data]
+    (eventbox :class { class ?: "icon-widget" }
+        :cursor "pointer"
+        :onclick onclick
+        :width { width ?: 40 }
+        { data ?: "?" }))
+
+
 ;; Widgets for left side of bar
+;; Drun widget
+(defwidget drun-widget []
+    (icon-widget :class "drun-widget"
+        :width 50
+        ;; I don't know why, but if no input was piped to rofi,
+        ;; it would close right away. So I'm piping dummy output
+        ;; to make it work
+        :onclick "echo | rofi -show drun" 
+        :data ""))     ; nf-linux-archlinux      
+
+
 ;; Workspace widget
 (deflisten workspaces-json
     :initial "[]"
     "~/.config/eww/bar/scripts/workspaces.sh")
 (defwidget workspaces []
-    (box 
+    (box :space-evenly false
         (for workspace in workspaces-json
             (label :class { workspace["is_focused"] ? "workspace-focused" : "workspace" }
                 :width 28
@@ -34,13 +54,6 @@
 
 
 ;; Icons for the right side of the bar
-(defwidget icon-widget [?class ?width onclick data]
-    (eventbox :class { class ?: "icon-widget" }
-        :cursor "pointer"
-        :onclick onclick
-        :width { width ?: 40 }
-        { data ?: "?" }))
-
 ;; Keyboard layout
 (deflisten current-kb-layout 
     :initial "us(qwerty)"
@@ -92,13 +105,14 @@
     (box :halign "start"
         :space-evenly false
 
+        (drun-widget)
         (workspaces)))
 
 (defwidget bar-middle []
     (box :halign "center"
         :space-evenly false
-
         :halign "center"
+
         (time-widget)))
 
 (defwidget bar-right []

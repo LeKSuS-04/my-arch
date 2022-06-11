@@ -47,6 +47,15 @@ $border-style: 2px solid $foreground;
   font-size: 26px;
 }
 
+.drun-widget {
+  @include icon-widget-mixin;
+  font-size: 28px;
+  margin-right: 20px;
+  &:hover {
+    border-left: none;
+  }
+}
+
 .workspace {
   @include icon-widget-mixin;
 }
