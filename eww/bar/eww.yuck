@@ -1,5 +1,3 @@
-(include "./bar/widgets/power.yuck")
-
 ;; =================
 ;; ;; Bar widgets ;;
 ;; =================
@@ -53,7 +51,8 @@
         current-time))
 
 
-;; Icons for the right side of the bar
+;; Icons and widgets for right side of bar
+
 ;; Keyboard layout
 (deflisten current-kb-layout 
     :initial "us(qwerty)"
@@ -93,8 +92,40 @@
     
 (defwidget power-button []
     (icon-widget :class "power-button"
-        :onclick "echo 'TODO'"
+        :onclick "~/.config/eww/scripts/eww_toggle.sh power-menu"
         :data "")) ; nf-fa-power_off
+
+(defwidget power-menu-buttons []
+    (box :class "power-menu"
+        :orientation "v"
+        (eventbox
+            :cursor "pointer"
+            :class "power-menu-button top"
+            :onclick "loginctl terminate-user \"$(whoami)\""
+            "")        ; nf-mdi-logout
+        (eventbox 
+            :cursor "pointer"
+            :class "power-menu-button"
+            :onclick "reboot"
+            "")        ; nf-fa-repeat
+        (eventbox 
+            :cursor "pointer"
+            :class "power-menu-button bottom"
+            :onclick "shutdown"
+            "")))      ; nf-fa-power_off
+
+(defwindow power-menu
+    :monitor 0
+    :geometry (geometry :x -24
+                        :y 66
+                        :width "60px"
+                        :height "180px"
+                        :anchor "top right")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore false
+    
+    (power-menu-buttons))
 
 ;; =====================================
 ;; ;; Putting widgets together in bar ;;

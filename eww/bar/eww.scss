@@ -7,6 +7,7 @@
 $background: #2f383e;
 $foreground: #a7c080;
 $active:     #7fbbb3;
+$red:          #e67e80;
 
 $background-lighter: adjust-color(
   $color: $background,
@@ -28,7 +29,7 @@ $border-style: 2px solid $foreground;
   border: $border-style;
 }
 
-// Widgets
+// Bar icons/widgets
 @mixin base-widget {
   color: $foreground;
 
@@ -79,5 +80,31 @@ $border-style: 2px solid $foreground;
   @include icon-widget-mixin;
   &:hover {
     border-right: none;
+  }
+}
+
+// Power menu
+.power-menu {
+  font-family: "FiraCode Nerd Font Mono";
+  font-weight: bold;
+  background-color: $background;
+  border: 2px solid $red;
+}
+.power-menu-button {
+  font-size: 40px;
+  color: $red;
+  
+  &:hover {
+    background-color: $background-lighter;
+    border-top: 2px solid $red;
+    border-bottom: 2px solid $red;
+  }
+
+  &.top:hover {
+    border-top: none;
+  }
+
+  &.bottom:hover {
+    border-bottom: none;
   }
 }
