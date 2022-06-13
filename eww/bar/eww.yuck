@@ -111,7 +111,7 @@
         (eventbox 
             :cursor "pointer"
             :class "power-menu-button bottom"
-            :onclick "shutdown"
+            :onclick "shutdown now"
             "")))      ; nf-fa-power_off
 
 (defwindow power-menu
