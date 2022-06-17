@@ -7,7 +7,8 @@
 $background: #2f383e;
 $foreground: #a7c080;
 $active:     #7fbbb3;
-$red:          #e67e80;
+$red:        #e67e80;
+$yellow:     #dbbc7f;
 
 $background-lighter: adjust-color(
   $color: $background,
@@ -83,21 +84,28 @@ $border-style: 2px solid $foreground;
   }
 }
 
+// Bar menus
+$power-menu-color: $red;
+$battery-menu-color: $yellow;
+
+@mixin menu-mixin {
+  font-family: "FiraCode Nerd Font Mono";
+  background-color: $background;
+}
+
 // Power menu
 .power-menu {
-  font-family: "FiraCode Nerd Font Mono";
-  font-weight: bold;
-  background-color: $background;
-  border: 2px solid $red;
+  @include menu-mixin;
+  border: 2px solid $power-menu-color;
 }
 .power-menu-button {
   font-size: 40px;
-  color: $red;
+  color: $power-menu-color;
   
   &:hover {
     background-color: $background-lighter;
-    border-top: 2px solid $red;
-    border-bottom: 2px solid $red;
+    border-top: 2px solid $power-menu-color;
+    border-bottom: 2px solid $power-menu-color;
   }
 
   &.top:hover {
@@ -107,4 +115,21 @@ $border-style: 2px solid $foreground;
   &.bottom:hover {
     border-bottom: none;
   }
+}
+
+// Battery menu
+.battery-menu {
+  @include menu-mixin;
+  border: 2px solid $battery-menu-color;
+}
+.battery-bar {
+  color: $battery-menu-color;
+  margin: 18px 28px;
+}
+.battery-value {
+  font-size: 28px;
+}
+.battery-status {
+  font-size: 18px;
+  padding: 5px 0;
 }

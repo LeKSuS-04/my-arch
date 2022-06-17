@@ -75,11 +75,6 @@
     (icon-widget :onclick "echo 'TODO'"
         :data { sys-data["network"]["icon"] }))
 
-(defwidget battery-widget []
-    (icon-widget
-        :onclick "echo 'TODO'"
-        :data { sys-data["battery"]["icon"] }))
-
 (defwidget brightness-widget []
     (icon-widget
         :onclick "echo 'TODO'"
@@ -89,6 +84,51 @@
     (icon-widget
         :onclick "echo 'TODO'"
         :data { sys-data["volume"]["icon"] }))
+
+(defwidget battery-widget []
+    (icon-widget
+        :onclick "~/.config/eww/scripts/eww_toggle.sh battery-menu"
+        :data { sys-data["battery"]["icon"] }))
+
+(defwidget battery-menu-widget []
+    (box :class "battery-menu"
+        :orientation "v"
+        :space-evenly false
+
+        (overlay
+            (circular-progress 
+                :height 180
+                :class "battery-bar"
+                :value { sys-data["battery"]["value"]["capacity"] }
+                :thickness 18
+                :start-at 25.0
+                :clockwise true)
+            (label
+                :class "battery-value"
+                :text { sys-data["battery"]["value"]["capacity"] + "%" }))
+
+        (label 
+            :class "battery-status"
+            :text { sys-data["battery"]["value"]["status"] == "Unknown"
+                        ? "Full"
+                        : sys-data["battery"]["value"]["status"] })
+
+        (label
+            :class "battery-status"
+            :text { sys-data["battery"]["time_left"] + " left" })))
+
+(defwindow battery-menu
+    :monitor 0
+    :geometry (geometry :x -24
+                        :y 66
+                        :width "200px"
+                        :height "260px"
+                        :anchor "top right")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore false
+    
+    (battery-menu-widget))
     
 (defwidget power-button []
     (icon-widget :class "power-button"

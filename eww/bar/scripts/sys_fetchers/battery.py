@@ -56,10 +56,34 @@ def _get_battery_status(battery_name: str) -> Battery:
     )
 
 
+def _calc_time_left(battery: Battery) -> str:
+    total = battery.charge_now
+    consuming = battery.current_now
+    if consuming == 0:
+        return ''  # nf-fa-infinity
+
+    hours_left = total / consuming
+    seconds_left = round(hours_left * 3600)
+    
+    h = seconds_left // 3600
+    m = (seconds_left % 3600) // 60
+    s = seconds_left % 60
+
+    output = ''
+    if h != 0:
+        output = f'{h}h {m}m {s}s'
+    elif m != 0:
+        output = f'{m}m {s}s'
+    else:
+        output = f'{s}s'
+    return output
+
+
 def get_battery(name: str) -> dict[str, Any]:
     battery = _get_battery_status(name)
     data = {
         'value': asdict(battery),
-        'icon': get_icon_from_stages(battery.capacity, battery_stages)
+        'icon': get_icon_from_stages(battery.capacity, battery_stages),
+        'time_left': _calc_time_left(battery),
     }
     return data
