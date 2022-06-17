@@ -4,7 +4,8 @@
 
 ;; Template for icon widget
 (defwidget icon-widget [?class ?width onclick data]
-    (eventbox :class { class ?: "icon-widget" }
+    (eventbox 
+        :class { class ?: "icon-widget" }
         :cursor "pointer"
         :onclick onclick
         :width { width ?: 40 }
@@ -14,7 +15,8 @@
 ;; Widgets for left side of bar
 ;; Drun widget
 (defwidget drun-widget []
-    (icon-widget :class "drun-widget"
+    (icon-widget 
+        :class "drun-widget"
         :width 50
         ;; I don't know why, but if no input was piped to rofi,
         ;; it would close right away. So I'm piping dummy output
@@ -28,9 +30,11 @@
     :initial "[]"
     "~/.config/eww/bar/scripts/workspaces.sh")
 (defwidget workspaces []
-    (box :space-evenly false
+    (box 
+        :space-evenly false
         (for workspace in workspaces-json
-            (label :class { workspace["is_focused"] ? "workspace-focused" : "workspace" }
+            (label 
+                :class { workspace["is_focused"] ? "workspace-focused" : "workspace" }
                 :width 28
                 :yalign 0.4
                 :text { workspace["is_focused"] ? "柳" :            ; nf-mdi-square_inc
@@ -45,7 +49,8 @@
     :initial "CURRENT DATE"
     "date +\"%d %b %H:%M\"")
 (defwidget time-widget []
-    (eventbox :class "time-widget"
+    (eventbox 
+        :class "time-widget"
         :cursor "pointer"
         :width 150
         current-time))
@@ -58,7 +63,8 @@
     :initial "us(qwerty)"
     "xkb-switch -W")
 (defwidget keyboard-layout []
-    (icon-widget :class "text-widget"
+    (icon-widget 
+        :class "text-widget"
         :onclick "~/.config/eww/bar/scripts/next_kb_layout.sh"
         :data { captures(current-kb-layout, ".{2}")[0][0] })) ;; First two letters of layout
 
@@ -90,8 +96,10 @@
         :onclick "~/.config/eww/scripts/eww_toggle.sh battery-menu"
         :data { sys-data["battery"]["icon"] }))
 
+;; Battery
 (defwidget battery-menu-widget []
-    (box :class "battery-menu"
+    (box 
+        :class "battery-menu"
         :orientation "v"
         :space-evenly false
 
@@ -129,14 +137,17 @@
     :wm-ignore false
     
     (battery-menu-widget))
-    
+
+;; Power
 (defwidget power-button []
-    (icon-widget :class "power-button"
+    (icon-widget 
+        :class "power-button"
         :onclick "~/.config/eww/scripts/eww_toggle.sh power-menu"
         :data "")) ; nf-fa-power_off
 
 (defwidget power-menu-buttons []
-    (box :class "power-menu"
+    (box 
+        :class "power-menu"
         :orientation "v"
         (eventbox
             :cursor "pointer"
@@ -173,21 +184,24 @@
 
 ;; Three parts of bar: left, middle and right
 (defwidget bar-left []
-    (box :halign "start"
+    (box 
+        :halign "start"
         :space-evenly false
 
         (drun-widget)
         (workspaces)))
 
 (defwidget bar-middle []
-    (box :halign "center"
+    (box 
+        :halign "center"
         :space-evenly false
         :halign "center"
 
         (time-widget)))
 
 (defwidget bar-right []
-    (box :halign "end"
+    (box 
+        :halign "end"
         :space-evenly false
 
         (keyboard-layout)
@@ -199,7 +213,8 @@
 
 ;; Full bar widget
 (defwidget bar-widget []
-    (centerbox :class "bar"
+    (centerbox 
+        :class "bar"
         :orientation "horizontal"
         (bar-left)
         (bar-middle)
